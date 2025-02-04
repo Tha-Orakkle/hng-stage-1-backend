@@ -3,24 +3,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .number import Number
 
-"""
-{
-    "number": 371,
-    "is_prime": false,
-    "is_perfect": false,
-    "properties": ["armstrong", "odd"],
-    "digit_sum": 11,  // sum of its digits
-    "fun_fact": "371 is an Armstrong number because 3^3 + 7^3 + 1^3 = 371" //gotten from the numbers API
-}
-
-Error
-{
-    "number": "alphabet",
-    "error": true
-}
-GET** <your-domain.com>/api/classify-number?number=371
-"""
-
 # Create your views here.
 
 class LandingView(APIView):
@@ -69,17 +51,17 @@ class NumberView(APIView):
             - "fun_fact": A fun fact about the number.
             If the 'number' parameter is missing or invalid, returns an error message with status 400.
         """
-        number = request.GET.get('number', None)
-        if number is None:
+        num = request.GET.get('number', None)
+        if num is None:
             return Response({"error": "number is required"}, status=400)
         try:
-            number = int(number)
+            num = int(num)
         except:
             return Response({
                 "number": "alphabet",
                 "error": "true"
             }, status=400)
-        number = Number(number)
+        number = Number(num)
         return Response({
             "number": number.number,
             "is_prime": number.is_prime(),

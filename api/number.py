@@ -8,6 +8,7 @@ class Number:
         Initializes the Number instance with a given number.
         """
         self.number = int(number)
+        self.abs_num = abs(self.number)
 
     def is_prime(self):
         """
@@ -17,8 +18,8 @@ class Number:
         """
         if self.number < 2:
             return False
-        for i in range(2, int(self.number ** 0.5) + 1):
-            if self.number % i == 0:
+        for i in range(2, int(self.abs_num ** 0.5) + 1):
+            if self.abs_num % i == 0:
                 return False
         return True
 
@@ -33,10 +34,10 @@ class Number:
         """
 
         divisors = []
-        for i in range(1, self.number // 2 + 1):
-            if self.number % i == 0:
+        for i in range(1, self.abs_num // 2 + 1):
+            if self.abs_num % i == 0:
                 divisors.append(i)
-        if sum(divisors) == self.number:
+        if sum(divisors) == self.abs_num:
             return True
         return False
     
@@ -65,9 +66,9 @@ class Number:
             bool: True if the number is an Armstrong number, False otherwise.
         """
 
-        pow = len(str(self.number))
-        num = sum((int(x) ** pow) for x in str(self.number))
-        if num == self.number:
+        pow = len(str(self.abs_num))
+        num = sum((int(x) ** pow) for x in str(self.abs_num))
+        if num == self.abs_num:
             return True
         return False
 
@@ -77,7 +78,7 @@ class Number:
         Returns:
             str: "even" if the number is even, "odd" if the number is odd.
         """
-        if self.number % 2 == 0:
+        if self.abs_num % 2 == 0:
             return "even"
         return "odd"
 
@@ -87,7 +88,7 @@ class Number:
         Returns:
             int: The sum of the digits of the number.
         """
-        return sum(int(digit) for digit in str(self.number))
+        return sum(int(digit) for digit in str(self.abs_num))
     
     def fun_fact(self):
         """
